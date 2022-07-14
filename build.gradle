@@ -63,3 +63,17 @@ jar
         attributes 'FMLAT': 'DimDoors_at.cfg'
     }
 }
+
+task devJar(type: Jar) {
+    manifest {
+        attributes(
+                'FMLAT': 'DimDoors_at.cfg',
+        )
+    }
+    classifier = 'dev'
+    from sourceSets.main.output
+}
+
+artifacts {
+    archives devJar
+}
