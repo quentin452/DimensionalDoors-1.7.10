@@ -19,7 +19,7 @@ public class ConnectionHandler
 {
     @SubscribeEvent
     public void serverConnectionFromClientEvent(FMLNetworkEvent.ServerConnectionFromClientEvent event) {
-        if (FMLCommonHandler.instance().getSide() == Side.SERVER) {
+        if (FMLCommonHandler.instance().getMinecraftServerInstance() != null) {
             NetHandlerPlayServer server = ((NetHandlerPlayServer)event.handler);
             FMLEmbeddedChannel channel =  NetworkRegistry.INSTANCE.getChannel("FORGE", Side.SERVER);
             for (NewDimData data : PocketManager.getDimensions()) {
