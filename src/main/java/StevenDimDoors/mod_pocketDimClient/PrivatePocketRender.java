@@ -82,7 +82,7 @@ public class PrivatePocketRender implements ISimpleBlockRenderingHandler
         IIcon icon = renderer.getBlockIcon(block, world, x, y, z, 2);
         
 
-
+        tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
         tessellator.setColorOpaque_F(1F, 1F, 1F);
         
         if (renderer.renderAllFaces || block.shouldSideBeRendered(world, x, y - 1, z, 0))
