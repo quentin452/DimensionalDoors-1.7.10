@@ -5,7 +5,6 @@ import java.util.Random;
 
 import StevenDimDoors.mod_pocketDim.world.LimboProvider;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -21,6 +20,7 @@ import net.minecraft.network.play.server.S1FPacketSetExperience;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -35,7 +35,6 @@ import StevenDimDoors.mod_pocketDim.tileentities.TileEntityDimDoor;
 import StevenDimDoors.mod_pocketDim.util.Point4D;
 import StevenDimDoors.mod_pocketDim.watcher.ClientDimData;
 import StevenDimDoors.mod_pocketDim.world.PocketBuilder;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class DDTeleporter
 {
@@ -438,7 +437,7 @@ public class DDTeleporter
         }
         if (link.linkType() == LinkType.RANDOM)
         {
-            Point4D randomDestination = getRandomDestination();
+            Point4D randomDestination = teleportToOverworld(entity);
             if (randomDestination != null)
             {
                 entity = teleportEntity(entity, randomDestination, true);
@@ -577,6 +576,17 @@ public class DDTeleporter
         if (!matches.isEmpty())
         {
             return matches.get( random.nextInt(matches.size()) );
+        }
+        return null;
+    }
+    public static Point4D teleportToOverworld(Entity entity) {
+        if (entity instanceof EntityPlayerMP) {
+            EntityPlayerMP player = (EntityPlayerMP) entity;
+            int dimensionId = 0;
+
+            if (player.dimension != dimensionId) {
+                player.mcServer.getConfigurationManager().transferPlayerToDimension(player, dimensionId, new Teleporter(player.mcServer.worldServerForDimension(dimensionId)));
+            }
         }
         return null;
     }
