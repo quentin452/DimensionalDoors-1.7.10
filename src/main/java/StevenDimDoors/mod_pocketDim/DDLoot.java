@@ -3,6 +3,7 @@ package StevenDimDoors.mod_pocketDim;
 import java.util.ArrayList;
 import java.util.Random;
 
+import StevenDimDoors.mod_pocketDim.config.DDWorldProperties;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -49,10 +50,14 @@ public class DDLoot {
 		
 		addContent(true, items, Items.iron_ingot, 160, 1, 3);
 		addContent(true, items, Items.coal, 120, 1, 3);
+		if(!DDWorldProperties.disablingQuartzContentRegistration){
 		addContent(true, items, Items.quartz, 120, 1, 3);
+		}
 		addContent(true, items, Items.book, 100);
 		addContent(true, items, Items.gold_ingot, 80, 1, 3);
+		if(!DDWorldProperties.disablingDiamondContentRegistration){
 		addContent(true, items, Items.diamond, 40, 1, 2);
+		}
 		addContent(true, items, Items.emerald, 20, 1, 2);
 		addContent(true, items, Items.golden_apple, 10);
 

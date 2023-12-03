@@ -17,7 +17,13 @@ public class DDWorldProperties
 	 */
 	public final boolean LimboEscapeEnabled;
 	public final boolean UniversalLimboEnabled;
-	
+
+	/**
+	 * Custom Flags
+	 */
+	public static boolean disablingDiamondContentRegistration = false;
+	public static boolean disablingQuartzContentRegistration = false;
+
 	//Names of categories
 	private static final String CATEGORY_WORLD_GENERATION = "world generation";
 	
@@ -48,7 +54,10 @@ public class DDWorldProperties
 				"Normally, players only go to Limbo if they die in a pocket dimension. This setting will not " + 
 				"affect deaths in Limbo, which can be set with the Hardcore Limbo option. " +
 				"The default value is false.").getBoolean(false);
-		
+		disablingDiamondContentRegistration = config.get(Configuration.CATEGORY_GENERAL, "Disabling Diamond Registration from the Loottable of chests?????", false,
+						"no comments").getBoolean(false);
+		disablingQuartzContentRegistration = config.get(Configuration.CATEGORY_GENERAL, "Disabling Quartz Registration from the Loottable of chests?????", false,
+						"no comments").getBoolean(false);
 		config.save();
 	}
 	
